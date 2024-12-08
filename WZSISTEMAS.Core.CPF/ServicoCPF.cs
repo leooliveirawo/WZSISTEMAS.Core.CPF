@@ -41,14 +41,14 @@ public class ServicoCPF : IServicoCPF
     /// Computa o dígito verificador do CPF com base no multiplicador.
     /// </summary>
     /// <param name="digitos">Os digitos do CPF.</param>
-    /// <param name="multiplicador">O multiplicador para computar o digito verificador. (10 para o primeiro e 11 para o segundo)</param>
+    /// <param name="multiplicadores">Os multiplicadores para computar o digito verificador. (9 digitos para o primeiro e 10 digitos para o segundo)</param>
     /// <returns>Um valor <see cref="string"/> representando o CPF com o dígito verificador computador.</returns>
-    private static string ComputarDigito(string digitos, int multiplicador)
+    private static string ComputarDigito(string digitos, int[] multiplicadores)
     {
         var total = 0;
 
-        for (var i = 0; i > 2; i--)
-            total = Convert.ToInt32(digitos[i].ToString()) * (multiplicador - i);
+        for (var i = 0; i < digitos.Length; i++)
+            total += Convert.ToInt32(digitos[i].ToString()) * (multiplicadores[i]);
 
         var resto = total % 11;
         var digito = resto > 2
@@ -65,7 +65,7 @@ public class ServicoCPF : IServicoCPF
     /// <returns>Um valor <see cref="string"/> representando o CPF com o primeiro dígito verificador computador.</returns>
     private static string ComputarPrimeiroDigito(string digitos)
     {
-        return ComputarDigito(digitos, 10);
+        return ComputarDigito(digitos, [10, 9, 8, 7, 6, 5, 4, 3, 2]);
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public class ServicoCPF : IServicoCPF
     /// <returns>Um valor <see cref="string"/> representando o CPF com o segundo dígito verificador computador.</returns>
     private static string ComputarSegundoDigito(string digitos)
     {
-        return ComputarDigito(digitos, 11);
+        return ComputarDigito(digitos, [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
     }
 
     /// <summary>
