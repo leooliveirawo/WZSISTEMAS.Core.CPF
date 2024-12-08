@@ -22,7 +22,6 @@ public class ServicoCPFTest
 
     public ServicoCPFTest() : this(new ServicoCPF())
 	{
-		servicoCPF = new ServicoCPF();
 	}
 
     public ServicoCPFTest(IServicoCPF servicoCPF)
