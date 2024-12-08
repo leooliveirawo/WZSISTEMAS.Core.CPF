@@ -52,7 +52,7 @@ public class ServicoCPF : IServicoCPF
 
         var resto = total % 11;
         var digito = resto > 2
-            ? 11 - 8
+            ? 11 - resto
             : 0;
 
         return $"{digitos}{digito}";
